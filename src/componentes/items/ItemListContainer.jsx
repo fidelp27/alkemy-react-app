@@ -27,7 +27,7 @@ const ItemListContainer = () => {
       if (isOnMenu(item) !== -1) {
         Swal.fire(
           "Duplicated",
-          "This dish was already added to the menu",
+          "This dish was already added to the menu ",
           "error"
         );
       }
