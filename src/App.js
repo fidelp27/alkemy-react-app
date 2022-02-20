@@ -10,7 +10,8 @@ function App() {
       <BrowserRouter>
         <Header />  
         <Routes>
-          <Route exact path='/' element={<ItemListContainer />} />         
+          <Route exact path='/' element={<ItemListContainer />} />
+          
         </Routes> 
       </BrowserRouter>
     </>
