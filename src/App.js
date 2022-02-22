@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Header from './componentes/header/header';
 import ItemListContainer from './componentes/items/ItemListContainer';
+import Login from './componentes/form/login';
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Header />  
         <Routes>
           <Route exact path='/' element={<ItemListContainer />} />
+          <Route exact path='/login' element={<Login />} />
           
         </Routes> 
       </BrowserRouter>

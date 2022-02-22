@@ -46,7 +46,7 @@ export const Info = styled(InfoTitle)`
   font-size: 1rem;
   height: 30px;
 `;
-export const InfoData = styled(InfoTitle)`
+export const InfoData = styled.span`
   font-size: 1rem;
   color: tomato;
   font-weight: bolder;

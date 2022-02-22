@@ -16,6 +16,10 @@ const Header = () => {
           />
         </Link>
 
+        <div>
+          <Link to="/login">Login</Link>
+        </div>
+
         <StyledMenuBox>
           <img
             className="menu-img"

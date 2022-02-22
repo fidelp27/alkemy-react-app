@@ -23,10 +23,9 @@ export function MenuProvider({ children }) {
       total_price(item);
       average_time(item);
       average_health(item);
-    }
-    if (counterDishes < 4) {
       setCounterDishes(counterDishes + 1);
     }
+
     errors(item);
   };
 
@@ -41,7 +40,7 @@ export function MenuProvider({ children }) {
       averageTime * counterDishes - item.readyInMinutes / (counterDishes - 1)
     );
   };
-
+  console.log(menu);
   const total_price = (item) => {
     let total = 0;
     menu?.map((e) => (total += e.pricePerServing));
@@ -76,6 +75,10 @@ export function MenuProvider({ children }) {
       );
     }
   };
+  useEffect(() => {
+    setMenu(menu);
+  }, [menu]);
+
   return (
     <ContextMenu.Provider
       value={{
