@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import ItemList from "./ItemList";
 import getDishes from "../../helpers/helper";
-import Swal from "sweetalert2";
+import { useMenu } from "../../context/ContextMenu";
+import Menu from "../Menu/Menu";
+import Login from "../form/login";
+import { useAuth } from "../../context/AuthContext";
 
 const ItemListContainer = () => {
   const [dishes, setDishes] = useState([]);
-  const [menu, setMenu] = useState([]);
+  const menu = useMenu();
+  const auth = useAuth();
 
   const getDishesList = () => {
     getDishes().then((res) => {
@@ -13,36 +17,17 @@ const ItemListContainer = () => {
     });
   };
 
-  const isOnMenu = (item) => {
-    return menu?.findIndex((dish) => dish.id === item.id);
-  };
-
-  const addToMenu = (item) => {
-    if (isOnMenu(item) === -1 && menu.length <= 3) {
-      setMenu([item, ...menu]);
-    } else {
-      if (menu.length === 4) {
-        Swal.fire("Menu complete", "The menu only accept 4 dishes", "warning");
-      }
-      if (isOnMenu(item) !== -1) {
-        Swal.fire(
-          "Duplicated",
-          "This dish was already added to the menu ",
-          "error"
-        );
-      }
-    }
-  };
-  console.log(menu);
-
   useEffect(() => {
     getDishesList();
   }, []);
 
-  return (
-    <div>
-      <ItemList dishes={dishes} addToMenu={addToMenu} />
-    </div>
+  return auth ? (
+    <>
+      {menu?.length > 0 ? <Menu /> : ""}
+      <ItemList dishes={dishes} />;
+    </>
+  ) : (
+    <Login />
   );
 };
 export default ItemListContainer;

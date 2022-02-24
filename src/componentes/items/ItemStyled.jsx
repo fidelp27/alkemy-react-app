@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 export const WrapperCards = styled.div`
   display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   margin: 1rem;
 `;
@@ -11,6 +14,7 @@ export const CardContainer = styled.div`
   position: relative;
   flex-direction: column;
   align-items: center;
+
   text-align: center;
   height: 460px;
   width: 300px;
@@ -42,7 +46,7 @@ export const Info = styled(InfoTitle)`
   font-size: 1rem;
   height: 30px;
 `;
-export const InfoData = styled(InfoTitle)`
+export const InfoData = styled.span`
   font-size: 1rem;
   color: tomato;
   font-weight: bolder;
