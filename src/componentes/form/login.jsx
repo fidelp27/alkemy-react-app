@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useAuth, useSetAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [completeLogin, setCompleteLogin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
+  const auth = useAuth();
+  const setAuth = useSetAuth();
+
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     setCompleteLogin(true);
@@ -16,7 +23,13 @@ const Login = () => {
         password: password,
       })
       .then(function (response) {
-        setTimeout(() => console.log(response), 1900);
+        setTimeout(() => {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("auth", true);
+
+          setToken(localStorage.getItem("token"));
+        }, 1900);
+        navigate("/");
       })
       .catch((err) => {
         if (email !== "challenge@alkemy.org" || password !== "react") {
@@ -33,6 +46,17 @@ const Login = () => {
       });
     setTimeout(() => setCompleteLogin(false), 2000);
   };
+
+  useEffect(() => {
+    if (token) {
+      setAuth(localStorage.getItem("auth"));
+    } else {
+      setAuth(localStorage.getItem("auth"));
+    }
+  }, [token, auth, setAuth]);
+  console.log(token);
+  console.log(auth);
+
   return (
     <>
       <Formik

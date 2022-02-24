@@ -2,9 +2,13 @@ import React from "react";
 import { useCounterDishes } from "../../context/ContextMenu";
 import { StyledHeader, StyledMenuBox } from "./headerStyled";
 import { Link } from "react-router-dom";
+import { useAuth, useHandleLogout } from "../../context/AuthContext";
 
 const Header = () => {
   const counterDishes = useCounterDishes();
+  const auth = useAuth();
+  const handleLogout = useHandleLogout();
+
   return (
     <>
       <StyledHeader>
@@ -15,11 +19,13 @@ const Header = () => {
             alt="logo"
           />
         </Link>
-
-        <div>
-          <Link to="/login">Login</Link>
-        </div>
-
+        {auth ? (
+          <button onClick={() => handleLogout()}>Logout</button>
+        ) : (
+          <div>
+            <Link to="/login">Login</Link>
+          </div>
+        )}
         <StyledMenuBox>
           <img
             className="menu-img"

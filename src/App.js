@@ -13,6 +13,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={<ItemListContainer />} />
           <Route exact path='/login' element={<Login />} />
+          <Route path='*' element={<Login />} />
           
         </Routes> 
       </BrowserRouter>

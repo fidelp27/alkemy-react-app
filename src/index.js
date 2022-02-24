@@ -4,15 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {MenuProvider} from "./context/ContextMenu"
+import { AuthProvider } from './context/AuthContext';
 
 
 
 
 ReactDOM.render(
   <React.StrictMode>  
-    <MenuProvider>
-      <App />
-    </MenuProvider>
+    <AuthProvider>
+      <MenuProvider>
+        <App />
+      </MenuProvider>
+    </AuthProvider> 
   </React.StrictMode>,
   document.getElementById('root')
 );
