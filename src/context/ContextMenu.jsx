@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import Swal from "sweetalert2";
+import { getDishes, searchDishes } from "../helpers/helper";
 
 const ContextMenu = React.createContext();
 
 export function MenuProvider({ children }) {
+  const [dishes, setDishes] = useState([]);
   const [menu, setMenu] = useState([]);
   const [counterDishes, setCounterDishes] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -75,10 +77,27 @@ export function MenuProvider({ children }) {
       );
     }
   };
+  const getDishesList = () => {
+    getDishes().then((res) => {
+      setDishes(res);
+    });
+  };
+
+  const searchDishesList = (query) => {
+    searchDishes(query).then((res) => {
+      setDishes(res);
+      console.log(dishes);
+    });
+  };
+
   useEffect(() => {
     setMenu(menu);
   }, [menu]);
 
+  useEffect(() => {
+    getDishesList();
+  }, []);
+  console.log(dishes);
   return (
     <ContextMenu.Provider
       value={{
@@ -89,6 +108,8 @@ export function MenuProvider({ children }) {
         totalPrice,
         averageHealth,
         averageTime,
+        searchDishesList,
+        dishes,
       }}
     >
       {children}
@@ -99,6 +120,10 @@ export function MenuProvider({ children }) {
 export function useMenu() {
   return useContext(ContextMenu).menu;
 }
+export function useDishes() {
+  return useContext(ContextMenu).dishes;
+}
+
 export function useAddToMenu() {
   return useContext(ContextMenu).addToMenu;
 }
@@ -116,5 +141,11 @@ export function useAverageTime() {
 }
 export function useAverageHeatlh() {
   return useContext(ContextMenu).averageHealth;
+}
+export function useGetDishesList() {
+  return useContext(ContextMenu).getDishesList;
+}
+export function useSearchDishesList() {
+  return useContext(ContextMenu).searchDishesList;
 }
 export default ContextMenu;

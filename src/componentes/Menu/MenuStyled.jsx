@@ -15,8 +15,7 @@ export const CardMenu = styled.div`
     height: 130px;
     padding-top: 0.4rem;
   }
-  img {
-  }
+
   p {
     max-width: 200px;
     font-size: 0.6rem;
@@ -39,7 +38,7 @@ export const CardMenu = styled.div`
     transition: all.5s ease;
     &:hover {
       cursor: pointer;
-      background-color: #6ff567;
+      background-color: #800a22;
     }
   }
 `;
