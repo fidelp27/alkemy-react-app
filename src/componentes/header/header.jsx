@@ -3,6 +3,7 @@ import { useCounterDishes } from "../../context/ContextMenu";
 import { StyledHeader, StyledMenuBox } from "./headerStyled";
 import { Link } from "react-router-dom";
 import { useAuth, useHandleLogout } from "../../context/AuthContext";
+import Search from "../search/search";
 
 const Header = () => {
   const counterDishes = useCounterDishes();
@@ -19,6 +20,7 @@ const Header = () => {
             alt="logo"
           />
         </Link>
+        <Search />
         {auth ? (
           <button onClick={() => handleLogout()}>Logout</button>
         ) : (

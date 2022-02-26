@@ -22,7 +22,7 @@ const Menu = () => {
         style={{
           position: "sticky",
           height: "35vh",
-          backgroundColor: "#67eb46",
+          backgroundColor: "#67eb4667",
           margin: "0",
           zIndex: "1",
           top: "0",

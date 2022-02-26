@@ -28,7 +28,7 @@ const Login = () => {
           localStorage.setItem("auth", true);
 
           setToken(localStorage.getItem("token"));
-        }, 1900);
+        }, 1000);
         navigate("/");
       })
       .catch((err) => {
@@ -40,11 +40,11 @@ const Login = () => {
                 "Please enter a correct email and password",
                 "warning"
               ),
-            1900
+            500
           );
         }
       });
-    setTimeout(() => setCompleteLogin(false), 2000);
+    setTimeout(() => setCompleteLogin(false), 1500);
   };
 
   useEffect(() => {

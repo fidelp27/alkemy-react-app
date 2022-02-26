@@ -1,25 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ItemList from "./ItemList";
-import getDishes from "../../helpers/helper";
-import { useMenu } from "../../context/ContextMenu";
+import { useDishes, useMenu } from "../../context/ContextMenu";
 import Menu from "../Menu/Menu";
 import Login from "../form/login";
 import { useAuth } from "../../context/AuthContext";
 
 const ItemListContainer = () => {
-  const [dishes, setDishes] = useState([]);
   const menu = useMenu();
   const auth = useAuth();
-
-  const getDishesList = () => {
-    getDishes().then((res) => {
-      setDishes(res);
-    });
-  };
-
-  useEffect(() => {
-    getDishesList();
-  }, []);
+  const dishes = useDishes();
 
   return auth ? (
     <>
