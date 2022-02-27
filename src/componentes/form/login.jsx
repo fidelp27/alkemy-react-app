@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, ErrorMessage } from "formik";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useAuth, useSetAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import {
+  StyledButton,
+  StyledForm,
+  StyledFormContainer,
+  StyledInput,
+  StyledInputContainer,
+  StyledLabel,
+  StyledP,
+} from "./StyledLogin";
 
 const Login = () => {
   const [completeLogin, setCompleteLogin] = useState(false);
@@ -62,20 +71,22 @@ const Login = () => {
         validate={(values) => {
           const form_errors = {};
           if (!values.email) {
-            form_errors.email = "Debes ingresar un email";
+            form_errors.email =
+              "This field can't be empty, please write your email address";
           } else if (
             !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
               values.email
             )
           ) {
             form_errors.email =
-              "El correo solo puede contener letras, números, puntos, guiones y guion bajo";
+              "The email address only accept letters, numbers, point, n-dash and underscore";
           } else if (values.email === "challenge@alkemy.org") {
             setEmail(values.email);
           }
 
           if (!values.password) {
-            form_errors.password = "Debes ingresar un password";
+            form_errors.password =
+              "This field can't be empty, please write your password";
           } else if (values.password === "react") {
             setPassword(values.password);
           }
@@ -87,11 +98,11 @@ const Login = () => {
         }}
       >
         {({ errors }) => (
-          <>
-            <Form action="" className="formulario">
-              <div>
-                <label htmlFor="email"></label> Email
-                <Field
+          <StyledFormContainer>
+            <StyledForm action="" className="formulario">
+              <StyledInputContainer>
+                <StyledLabel htmlFor="email">Email</StyledLabel>
+                <StyledInput
                   type="email"
                   name="email"
                   id="email"
@@ -99,23 +110,12 @@ const Login = () => {
                 />
                 <ErrorMessage
                   name="email"
-                  component={() => (
-                    <p
-                      style={{
-                        color: "red",
-                        fontSize: "0.7rem",
-                        fontWeight: "bold",
-                        letterSpacing: "1px",
-                      }}
-                    >
-                      {errors.email}{" "}
-                    </p>
-                  )}
+                  component={() => <StyledP>{errors.email} </StyledP>}
                 />
-              </div>
-              <div>
-                <label htmlFor="password"> Password</label>
-                <Field
+              </StyledInputContainer>
+              <StyledInputContainer>
+                <StyledLabel htmlFor="password"> Password</StyledLabel>
+                <StyledInput
                   type="password"
                   name="password"
                   id="password"
@@ -123,30 +123,25 @@ const Login = () => {
                 />
                 <ErrorMessage
                   name="password"
-                  component={() => (
-                    <p
-                      style={{
-                        color: "red",
-                        fontSize: "0.7rem",
-                        fontWeight: "bold",
-                        letterSpacing: "1px",
-                      }}
-                    >
-                      {errors.password}{" "}
-                    </p>
-                  )}
+                  component={() => <StyledP>{errors.password} </StyledP>}
                 />
-              </div>
-              <button type="submit">Enviar</button>
+              </StyledInputContainer>
+              <StyledButton type="submit">Send</StyledButton>
               {completeLogin && (
                 <img
-                  src="../../assets/loading.gif"
+                  src="https://media.giphy.com/media/QpClM4sgUDXoZKExzj/giphy.gif"
                   alt="loader"
-                  style={{ position: "absolute", top: "50px", left: "50px" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    position: "absolute",
+                    width: "300px",
+                    height: "300px",
+                  }}
                 />
               )}
-            </Form>
-          </>
+            </StyledForm>
+          </StyledFormContainer>
         )}
       </Formik>
     </>

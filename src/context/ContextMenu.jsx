@@ -19,12 +19,30 @@ export function MenuProvider({ children }) {
 
     if (isOnMenu(item) === -1) {
       if (menu.length <= 3) {
-        setMenu([item, ...menu]);
+        if (veganDishes.length < 2 && item.vegan) {
+          setMenu([item, ...menu]);
+          setCounterDishes(counterDishes + 1);
+        } else if (veganDishes.length >= 2 && item.vegan) {
+          Swal.fire(
+            "Vegan dishes completed",
+            "The menu only accept 2 vegan dishes",
+            "warning"
+          );
+        } else if (otherDishes.length < 2 && !item.vegan)
+          setMenu([item, ...menu]);
         setCounterDishes(counterDishes + 1);
+      } else if (otherDishes.length >= 2 && !item.vegan) {
+        Swal.fire(
+          "No vegan dishes completed",
+          "The menu only accept 2  no vegan dishes",
+          "warning"
+        );
       }
     }
     errors(item);
   };
+  const veganDishes = menu?.filter((item) => item.vegan === true);
+  const otherDishes = menu?.filter((item) => !item.vegan === true);
 
   const deleteDish = (item) => {
     setMenu(menu?.filter((elem) => elem.id !== item.id));

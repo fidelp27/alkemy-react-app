@@ -1,7 +1,8 @@
 import React from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik } from "formik";
 import { useSearchDishesList } from "../../context/ContextMenu";
 import Swal from "sweetalert2";
+import { FormStyled, ImgStyled, SearchStyled } from "./seacrhStyled";
 
 const Search = () => {
   const searchDishesList = useSearchDishesList();
@@ -22,14 +23,15 @@ const Search = () => {
         }}
       >
         {({ errors }) => (
-          <Form>
-            <Field
+          <FormStyled>
+            <SearchStyled
               type="text"
               name="searchDish"
               id="searchDish"
-              placeholder="Ingresa un ingrediente"
+              placeholder="Search a dish"
             />
-          </Form>
+            <ImgStyled src="https://i.imgur.com/P0Uas0u.png" alt="lupa" />
+          </FormStyled>
         )}
       </Formik>
     </>

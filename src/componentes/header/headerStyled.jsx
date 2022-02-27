@@ -29,3 +29,22 @@ export const StyledMenuBox = styled.div`
     margin: 0.5rem;
   }
 `;
+export const StyledButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  padding: 0.6rem;
+  border-radius: 1rem;
+  background-color: red;
+  border: none;
+  color: #fff;
+  letter-spacing: 1px;
+  font-weight: bolder;
+  img {
+    margin-right: 5px;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+`;
