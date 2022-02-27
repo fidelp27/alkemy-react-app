@@ -54,8 +54,6 @@ const Login = () => {
       setAuth(localStorage.getItem("auth"));
     }
   }, [token, auth, setAuth]);
-  console.log(token);
-  console.log(auth);
 
   return (
     <>
