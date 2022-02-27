@@ -1,27 +1,19 @@
 import React from "react";
-import {
-  useMenu,
-  useDeleteDish,
-  useTotalPrice,
-  useAverageHeatlh,
-  useAverageTime,
-} from "../../context/ContextMenu";
+import { useMenu, useDeleteDish } from "../../context/ContextMenu";
 import { WrapperCards } from "../items/ItemStyled";
-import { CardMenu, Data } from "../Menu/MenuStyled";
+import { CardMenu } from "../Menu/MenuStyled";
+import TotalMenu from "../totalMenu/totalMenu";
 
 const Menu = () => {
   const menu = useMenu();
   const deleteDish = useDeleteDish();
-  const totalPrice = useTotalPrice();
-  const averageHealth = useAverageHeatlh();
-  const averageTime = useAverageTime();
 
   return (
     <>
       <WrapperCards
         style={{
           position: "sticky",
-          height: "35vh",
+          height: "40vh",
           backgroundColor: "#67eb4667",
           margin: "0",
           zIndex: "1",
@@ -39,11 +31,7 @@ const Menu = () => {
             );
           })
         )}
-        <Data>
-          <p>Total Price: {totalPrice.toFixed(2)} </p>
-          <p>Average Preparation Time: {averageTime.toFixed(2)} </p>
-          <p>Averge Health Score: {averageHealth.toFixed(2)} </p>
-        </Data>
+        <TotalMenu />
       </WrapperCards>
     </>
   );
